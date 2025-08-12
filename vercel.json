@@ -5,7 +5,8 @@
       "src": "src/main.ts",
       "use": "@vercel/node",
       "config": {
-        "buildCommand": "npm run vercel-build"
+        "buildCommand": "npm run vercel-build",
+        "maxDuration": 30
       }
     }
   ],
@@ -19,11 +20,6 @@
       "dest": "src/main.ts"
     }
   ],
-  "functions": {
-    "src/main.ts": {
-      "maxDuration": 30
-    }
-  },
   "env": {
     "NODE_ENV": "production"
   }
