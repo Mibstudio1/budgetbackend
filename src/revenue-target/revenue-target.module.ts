@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { RevenueTargetService } from './revenue-target.service';
 import { RevenueTargetController } from './revenue-target.controller';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { RevenueTargetRepository } from './revenue-target.repository';
 
 @Module({

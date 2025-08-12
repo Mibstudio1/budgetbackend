@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { UserRepository } from './user.repository';
-import { HashService } from 'src/authen/hash.service';
+import { HashService } from '../authen/hash.service';
 
 @Module({
   controllers: [UserController],
