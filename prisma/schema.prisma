@@ -19,9 +19,9 @@ model BG_Project {
   createdAt      DateTime             @default(now())
   updatedAt      DateTime             @updatedAt
   createdBy      String
-  salesEntry     BG_Sales_Entry[]
-  expenseEntries BG_Expense_Entries[]
   BG_Budget      BG_Budget[]
+  expenseEntries BG_Expense_Entries[]
+  salesEntry     BG_Sales_Entry[]
 }
 
 model BG_Sales_Entry {
@@ -31,11 +31,11 @@ model BG_Sales_Entry {
   totalPrice  Decimal
   createdBy   String
   type        String
-  status      String      @default("pending")
   createdAt   DateTime    @default(now())
+  bGProjectId String?
+  status      String      @default("pending")
   updatedAt   DateTime    @default(now()) @updatedAt
   bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])
-  bGProjectId String?
 }
 
 model BG_Expense_Entries {
@@ -43,13 +43,13 @@ model BG_Expense_Entries {
   name        String
   date        String
   createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @default(now()) @updatedAt
   cost        Decimal
   isPaid      Boolean     @default(false)
   createdBy   String
   category    String
-  bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])
   bGProjectId String?
+  updatedAt   DateTime    @default(now()) @updatedAt
+  bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])
 }
 
 model BG_Revenue_Targets {
@@ -72,13 +72,37 @@ model BG_User {
 
 model BG_Budget {
   id          String      @id @default(uuid())
-  bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])
   bGProjectId String?
   description String
   budget      Int
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   createdBy   String
+  bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])
+}
+
+model BG_Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  type        String
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String
+  usageCount  Int      @default(0)
+}
+
+model BG_Expense_Item {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  group       String
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String
+  usageCount  Int      @default(0)
 }
 
 enum Project_Group {
@@ -100,28 +124,4 @@ enum Expense_Items {
   INTERNET        @map("internet")
   FOOD            @map("food")
   SALES_INCENTIVE @map("sales_incentive")
-}
-
-model BG_Category {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  type        String   // 'expense' or 'sales'
-  description String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  createdBy   String
-  usageCount  Int      @default(0)
-}
-
-model BG_Expense_Item {
-  id          String   @id @default(uuid())
-  name        String   @unique
-  group       String   // category
-  description String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  createdBy   String
-  usageCount  Int      @default(0)
 }
