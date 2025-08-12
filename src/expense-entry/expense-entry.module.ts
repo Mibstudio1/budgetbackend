@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ExpenseEntryService } from './expense-entry.service';
 import { ExpenseEntryController } from './expense-entry.controller';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { ExpenseEntryRepository } from './expense-entry.repository';
 
 @Module({

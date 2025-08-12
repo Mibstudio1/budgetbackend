@@ -3,7 +3,7 @@ import { AuthenService } from './authen.service';
 import { AuthenController } from './authen.controller';
 import { HashService } from './hash.service';
 import { AuthenRepository } from './authen.repository';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';

@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { OptionsService } from './options.service';
-import { Public } from '../common/decorators/public.decorator';
+import { Public } from 'src/common/decorators/public.decorator';
 @Controller('options')
 export class OptionsController {
   constructor(private readonly optionsService: OptionsService) {}

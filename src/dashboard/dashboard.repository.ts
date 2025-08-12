@@ -1,4 +1,4 @@
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { SearchProjectDashboardDto } from './dto/search-project-dashboard.dto';
 import { Injectable } from '@nestjs/common';
 import { SearchMonthlyDto } from './dto/search-monthly-dashboard.dto';
