@@ -15,10 +15,15 @@ async function bootstrap() {
     }),
   );
   app.setGlobalPrefix('api');
-  app.enableCors();
+  app.enableCors({
+    origin: true,
+    credentials: true,
+  });
   const reflector = app.get(Reflector);
   app.useGlobalGuards(new JwtAuthGuard(reflector));
 
-  await app.listen(process.env.WEB_SERVER_PORT ?? 5000);
+  const port = process.env.PORT || process.env.WEB_SERVER_PORT || 5000;
+  await app.listen(port);
+  console.log(`Application is running on: http://localhost:${port}`);
 }
 bootstrap();
