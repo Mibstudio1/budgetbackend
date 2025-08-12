@@ -1,0 +1,127 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model BG_Project {
+  id             String               @id @default(uuid())
+  name           String
+  description    String?
+  type           String
+  status         String
+  startDate      String?
+  endDate        String?
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  createdBy      String
+  salesEntry     BG_Sales_Entry[]
+  expenseEntries BG_Expense_Entries[]
+  BG_Budget      BG_Budget[]
+}
+
+model BG_Sales_Entry {
+  id          String      @id @default(uuid())
+  date        String
+  description String?
+  totalPrice  Decimal
+  createdBy   String
+  type        String
+  status      String      @default("pending")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])
+  bGProjectId String?
+}
+
+model BG_Expense_Entries {
+  id          String      @id @default(uuid())
+  name        String
+  date        String
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now()) @updatedAt
+  cost        Decimal
+  isPaid      Boolean     @default(false)
+  createdBy   String
+  category    String
+  bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])
+  bGProjectId String?
+}
+
+model BG_Revenue_Targets {
+  id        String   @id @default(uuid())
+  month     String
+  target    Decimal
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  createdBy String
+}
+
+model BG_User {
+  id       String  @id @default(uuid())
+  name     String
+  username String  @unique
+  password String
+  role     String
+  isActive Boolean @default(true)
+}
+
+model BG_Budget {
+  id          String      @id @default(uuid())
+  bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])
+  bGProjectId String?
+  description String
+  budget      Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  createdBy   String
+}
+
+enum Project_Group {
+  SOFTWARE_DEV      @map("software_dev")
+  OUTSOURCE_SERVICE @map("outsource_service")
+  OTHER             @map("other")
+}
+
+enum Project_Status {
+  IN_PROGRESS @map("in_progress")
+  COMPLETED   @map("completed")
+  CANCEL      @map("cancel")
+}
+
+enum Expense_Items {
+  OUTSOURCE       @map("outsource")
+  SERVER          @map("server")
+  SUBSCRIPTION    @map("subscription")
+  INTERNET        @map("internet")
+  FOOD            @map("food")
+  SALES_INCENTIVE @map("sales_incentive")
+}
+
+model BG_Category {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  type        String   // 'expense' or 'sales'
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String
+  usageCount  Int      @default(0)
+}
+
+model BG_Expense_Item {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  group       String   // category
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String
+  usageCount  Int      @default(0)
+}
