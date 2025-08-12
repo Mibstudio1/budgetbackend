@@ -42,9 +42,6 @@ lerna-debug.log*
 .env.production.local
 .env.local
 
-# Vercel
-.vercel
-
 # temp directory
 .temp
 .tmp
