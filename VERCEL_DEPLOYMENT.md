@@ -46,7 +46,7 @@ vercel --prod
 
 ### 5. ไฟล์ที่สำคัญสำหรับ Vercel
 
-- `vercel.json` - Vercel configuration
+- `vercel.json` - Vercel configuration (ใช้ functions แทน builds)
 - `src/main.ts` - Entry point
 - `package.json` - Dependencies และ scripts
 
