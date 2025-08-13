@@ -15,6 +15,7 @@ export class ExpenseEntryRepository {
     isPaid,
     createdBy,
     category,
+    note,
   }: CreateExpenseEntryDto) {
     await this.prisma.bG_Expense_Entries.create({
       data: {
@@ -25,6 +26,7 @@ export class ExpenseEntryRepository {
         isPaid,
         createdBy,
         category,
+        note,
       },
     });
   }

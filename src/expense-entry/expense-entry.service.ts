@@ -23,6 +23,7 @@ export class ExpenseEntryService {
       status: e.isPaid,
       isPaid: e.isPaid, // เพิ่ม isPaid field เพื่อให้ frontend ใช้ได้
       category: e.category,
+      note: e.note,
     }));
 
     return {

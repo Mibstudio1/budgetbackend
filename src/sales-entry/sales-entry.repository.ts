@@ -14,6 +14,7 @@ export class SalesEntryRepository {
     totalPrice,
     type,
     createdBy,
+    note,
   }: CreateSalesEntryDto) {
     await this.prisma.bG_Sales_Entry.create({
       data: {
@@ -23,6 +24,7 @@ export class SalesEntryRepository {
         totalPrice,
         type,
         createdBy,
+        note,
       },
     });
   }

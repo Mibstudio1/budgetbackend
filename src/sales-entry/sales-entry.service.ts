@@ -26,6 +26,7 @@ export class SalesEntryService {
         quantity: 1, // Default quantity since we only store totalPrice
         selling: e.totalPrice, // Use totalPrice as selling price for display
         status: e.status || 'pending', // Add status field
+        note: e.note,
       })),
     };
   }

@@ -31,6 +31,7 @@ model BG_Sales_Entry {
   totalPrice  Decimal
   createdBy   String
   type        String
+  note        String?
   createdAt   DateTime    @default(now())
   bGProjectId String?
   status      String      @default("pending")
@@ -47,6 +48,7 @@ model BG_Expense_Entries {
   isPaid      Boolean     @default(false)
   createdBy   String
   category    String
+  note        String?
   bGProjectId String?
   updatedAt   DateTime    @default(now()) @updatedAt
   bGProject   BG_Project? @relation(fields: [bGProjectId], references: [id])

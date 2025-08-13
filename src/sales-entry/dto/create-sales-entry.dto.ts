@@ -26,4 +26,7 @@ export class CreateSalesEntryDto {
   @IsString()
   @IsNotEmpty()
   createdBy: string;
+
+  @IsString()
+  note?: string;
 }
