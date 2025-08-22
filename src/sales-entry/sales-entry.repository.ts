@@ -77,7 +77,6 @@ export class SalesEntryRepository {
           totalPrice: updateData.totalPrice || updateData.selling,
           type: updateData.type,
           bGProjectId: updateData.bG_projectId,
-          note: updateData.note,
         },
         include: {
           bGProject: true,
