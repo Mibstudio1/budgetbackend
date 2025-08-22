@@ -32,6 +32,5 @@ export class CreateExpenseEntryDto {
   category: string;
 
   @IsString()
-  @IsNotEmpty()
-  note: string;
+  note?: string;
 }

@@ -94,6 +94,7 @@ export class ExpenseEntryRepository {
           isPaid: updateData.isPaid,
           category: updateData.category,
           bGProjectId: updateData.bGProjectId,
+          note: updateData.note,
         },
         include: {
           bGProject: true,
